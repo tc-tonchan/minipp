@@ -1,0 +1,7 @@
+.contents.row
+  = form_for @tweet, url: {action: 'update'} do |f|
+    %h3
+      編集する
+    -# %input{:autofocus => "true", :name => "image", :placeholder => "Image Url", :type => "text", :value => "#{@tweet.image}"}/
+    = f.text_field :text, class: 'tweet_text'
+    = f.submit 'Send', class: 'tweet_submit'

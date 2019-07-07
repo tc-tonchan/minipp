@@ -1,0 +1,12 @@
+.Chat
+  .Chat__user-name
+    = tweet.user.nickname
+  .Chat__content
+    - if tweet.text.present?
+      = tweet.text
+  .Chat__edit
+  - if user_signed_in? && current_user.id == tweet.user_id
+    = link_to '編集', "/tweets/#{tweet.id}/edit", method: :get
+  .Chat__delete
+  - if user_signed_in? && current_user.id == tweet.user_id
+    = link_to '削除', "/tweets/#{tweet.id}", method: :delete
