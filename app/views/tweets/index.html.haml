@@ -1,0 +1,32 @@
+.Headers
+  .Header
+    .Header__logo
+      - if user_signed_in?
+        #{current_user.nickname}とみんなのツイートTIME
+      - else
+        ようこそ！！
+    .Header__name
+      MINIPP
+    .Header__sign-up
+      - unless user_signed_in?
+        = link_to new_user_registration_path do
+          sign-up
+    .Header__sign-in
+      - unless user_signed_in?
+        = link_to new_user_session_path do
+          sign-in
+    .Header__sign-out
+      - if user_signed_in?
+        = link_to destroy_user_session_path, method: :delete do
+          sign-out
+
+.Wrapper
+  .Chats
+    = render @tweets
+
+  - if user_signed_in?
+    .from
+      = form_for [@tweet] do |f|
+        = f.text_field :text, class: 'form__tweet', placeholder: 'type a tweet'
+        .form__mask
+        = f.submit 'Send', class: 'form__submit'
